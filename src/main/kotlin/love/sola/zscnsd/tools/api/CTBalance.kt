@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono
 import reactor.core.publisher.toMono
 
 @RestController
-class CTBalance {
+class CTBalanceController {
 
     companion object {
         val URL = "http://gd.189.cn/webpay/chongzhi/czorderinput.jsp?busiType=AD&latnId=0760&bindType=5BA&isFromMall=true"
