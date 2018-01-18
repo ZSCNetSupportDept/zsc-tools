@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>宽带余额查询</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/font-awesome/5.0.2/web-fonts-with-css/css/fontawesome.min.css">
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script src="/webjars/popper.js/1.11.1/dist/popper.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-12">
+            <h1 class="text-center">宽带余额查询</h1>
+        </div>
+        <!--<div class="col-12">-->
+        <!--<h6 class="text-center">-->
+        <!--<strong>Don't join ACM.</strong>-->
+        <!--</h6>-->
+        <!--</div>-->
+    </div>
+    <div class="row mt-3 mb-3 justify-content-center">
+        <div class="col-10 col-lg-4 d-flex justify-content-center">
+            <div class="input-group">
+                <input id="user" type="text" class="form-control" placeholder="153909*****">
+                <div class="input-group-append">
+                    <span class="input-group-text">@zsdzkd</span>
+                    <button class="btn btn-info" onclick="query()">Query</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-10 col-lg-4">
+            <div id="result" class="text-center alert alert-success" role="alert" style="display: none">
+                0.00
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row justify-content-center">
+        <div class="text-center col-12">
+            <p>&middot; &copy; 2018 &middot; <a href="http://weibo.com/soladev">Sola</a> &middot;</p>
+            <a href="http://www.zsxyww.com">@中山学院网维报修系统</a>
+            <br>
+            <img src="images/qrcode.jpg" alt="QRCode" class="img-thumbnail"/>
+        </div>
+    </div>
+</div>
+<script>
+    function query () {
+        var result = $('#result')
+        result.css('display', 'none')
+        $.get(
+            '/api/ct-balance',
+            {num: $('#user').val() + '@zsdzkd'},
+            function (data) {
+                var result = $('#result')
+                if (data.success) {
+                    result.removeClass('alert-danger')
+                    result.addClass('alert-success')
+                    result.text($('#user').val() + '@zsdzkd: ' + data.balance)
+                } else {
+                    result.removeClass('alert-success')
+                    result.addClass('alert-danger')
+                    result.text(data.error)
+                }
+                result.css('display', '')
+            },
+            'json'
+        )
+    }
+</script>
+</body>
+</html>

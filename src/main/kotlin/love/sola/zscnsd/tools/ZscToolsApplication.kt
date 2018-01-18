@@ -15,6 +15,9 @@ class ZscToolsApplication {
         GET("/cet") {
             ServerResponse.permanentRedirect(URI.create("http://www.chsi.com.cn/cet/")).build()
         }
+        GET("/yue") {
+            ServerResponse.permanentRedirect(URI.create("/yue.html")).build()
+        }
     }
 
 }

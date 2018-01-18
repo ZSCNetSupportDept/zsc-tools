@@ -32,7 +32,7 @@ class CTBalanceController {
                 }
                 val matchResult = BALANCE_REGEX.find(it)
                 if (matchResult == null) {
-                    Response(false, error = "未查询到该号码余额信息。")
+                    Response(false, error = "服务器未返回余额信息，请重试。")
                 } else {
                     val balance = matchResult.groupValues[1].toFloat()
                     Response(true, balance = balance)
